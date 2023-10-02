@@ -85,6 +85,7 @@ func handleClient(client *net.TCPConn) {
 		log.Log.Errorf("%v: %v", client.RemoteAddr(), err)
 		return
 	}
+	log.Log.Debugf("%v: Client is authenticated", client.RemoteAddr())
 
 	// Execute command
 	peer, commandReply, err := connectCommand(client)
@@ -99,6 +100,7 @@ func handleClient(client *net.TCPConn) {
 		log.Log.Errorf("%v: %v", client.RemoteAddr(), err)
 		return
 	}
+	log.Log.Debugf("%v: Proxy server is connected to peer", client.RemoteAddr())
 
 	// Transfer data
 	transferData(client, peer)
