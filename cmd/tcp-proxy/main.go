@@ -3,8 +3,8 @@ package main
 import (
 	"runtime"
 
-	proxy "tcp-proxy/internal"
-	cli "tcp-proxy/internal/cli-parser"
+	"tcp-proxy/internal/cli"
+	"tcp-proxy/internal/proxy"
 )
 
 func main() {

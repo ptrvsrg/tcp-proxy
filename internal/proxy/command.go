@@ -1,4 +1,4 @@
-package tcpproxy
+package proxy
 
 import (
 	"encoding/binary"
@@ -55,7 +55,7 @@ func connectCommand(client *net.TCPConn) (*net.TCPConn, byte, error) {
 		if err != nil {
 			return nil, SOCKS_REPLY_CONNECTION_NOT_ALLOWED_BY_RULESET, err
 		}
-		return ipv4Connect(ipv4, port, client)
+		return ipv4Connect(ipv4, port)
 	case SOCKS_ADDR_TYPE_FQDN:
 		domainName, port, err := readDomainNameAndPort(client)
 		if err != nil {
@@ -88,7 +88,7 @@ func readIpv4AndPort(client *net.TCPConn) (net.IP, int, error) {
 	return ip, port, nil
 }
 
-func ipv4Connect(ipv4 net.IP, port int, client *net.TCPConn) (*net.TCPConn, byte, error) {
+func ipv4Connect(ipv4 net.IP, port int) (*net.TCPConn, byte, error) {
 	// Connect to peer
 	tcpAddr := &net.TCPAddr{
 		IP:   ipv4,
@@ -154,7 +154,7 @@ func domainNameConnect(domainName string, port int, client *net.TCPConn) (*net.T
 	// Try connecting to each ipv4 address
 	for _, ip := range ips {
 		if ipv4 := ip.To4(); ipv4 != nil {
-			peer, reply, err := ipv4Connect(ipv4, port, client)
+			peer, reply, err := ipv4Connect(ipv4, port)
 			if err == nil {
 				// Found working ip address
 				return peer, reply, nil

@@ -22,6 +22,6 @@ func (f *CustomTextFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 
 var Log = &logrus.Logger{
 	Out:       os.Stdout,
-	Level:     logrus.DebugLevel,
+	Level:     logrus.InfoLevel,
 	Formatter: &CustomTextFormatter{},
 }
