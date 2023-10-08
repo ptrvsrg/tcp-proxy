@@ -23,7 +23,7 @@ build: clean
 .PHONY: run
 run: build
 	@echo "Running the executable file..."
-	./$(TARGET) -address $(ADDRESS) -port $(PORT)
+	./$(TARGET) -port $(PORT)
 
 # Help (display available commands)
 .PHONY: help
@@ -33,7 +33,7 @@ help:
 	@echo "        Clean generated files"
 	@echo "    make build"
 	@echo "        Build the executable file"
-	@echo "    make run ADDRESS=<string> PORT=<int>"
+	@echo "    make run PORT=<int>"
 	@echo "        Run the built executable file"
 	@echo "    make help"
 	@echo "        Display this message"
